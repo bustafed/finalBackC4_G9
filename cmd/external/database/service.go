@@ -3,6 +3,7 @@ package database
 import (
 	"database/sql"
 	"fmt"
+
 	"github.com/bustafed/finalBackC4_G9/internal/dentists"
 	"github.com/bustafed/finalBackC4_G9/internal/patients"
 )
@@ -40,20 +41,78 @@ func (s *SqlStore) GetDentistByID(id int) (dentists.Dentist, error) {
 	return dentistReturn, nil
 }
 
-/*
-func (s *SqlStore) Modify(id int, product products.Product) (products.Product, error) {
-	query := fmt.Sprintf("UPDATE products SET name = '%s', quantity = %v, code_value = '%s',"+
-		" is_published = %v, expiration = '%s', price = %v WHERE id = %v;", product.Name, product.Quantity,
-		product.CodeValue, product.IsPublished, product.Expiration, product.Price, product.ID)
+func (s *SqlStore) ModifyPatientByID(id int, patient patients.Patient) (patients.Patient, error) {
+	query := fmt.Sprintf("UPDATE patients SET name = '%s', surname = '%s', address = '%s',"+
+		" dni = '%s', registration_date = '%s' WHERE id = %v;", patient.Name, patient.Surname,
+		patient.Address, patient.Dni, patient.RegistrationDate, id)
 	stmt, err := s.DB.Prepare(query)
 	if err != nil {
-		return products.Product{}, err
+		return patients.Patient{}, err
 	}
+
+	defer stmt.Close()
 
 	_, err = stmt.Exec()
 	if err != nil {
-		return products.Product{}, err
+		return patients.Patient{}, err
 	}
 
-	return product, nil
-}*/
+	return patient, nil
+}
+
+func (s *SqlStore) ModifyPatientByProperty(id int, patient patients.Patient) (patients.Patient, error) {
+	query := fmt.Sprintf("UPDATE patients SET name = '%s', surname = '%s', address = '%s',"+
+		" dni = '%s', registration_date = '%s' WHERE id = %v;", patient.Name, patient.Surname,
+		patient.Address, patient.Dni, patient.RegistrationDate, id)
+	stmt, err := s.DB.Prepare(query)
+	if err != nil {
+		return patients.Patient{}, err
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec()
+	if err != nil {
+		return patients.Patient{}, err
+	}
+
+	return patient, nil
+}
+
+func (s *SqlStore) CreatePatient(patient patients.Patient) (patients.Patient, error) {
+	query := fmt.Sprintf("INSERT INTO patients (name, surname, address, dni, registration_date)"+
+		" VALUES ('%s', '%s', '%s', '%s', '%s') RETURNING id;",
+		patient.Name, patient.Surname, patient.Address, patient.Dni, patient.RegistrationDate)
+	stmt, err := s.DB.Prepare(query)
+	if err != nil {
+		return patients.Patient{}, err
+	}
+	defer stmt.Close()
+
+	var insertedId int
+
+	err = stmt.QueryRow().Scan(&insertedId)
+	if err != nil {
+		return patients.Patient{}, err
+	}
+
+	patient.ID = insertedId
+	return patient, nil
+}
+
+func (s *SqlStore) DeletePatientByID(id int) error {
+
+	query := fmt.Sprintf("DELETE FROM patients WHERE id = %v;", id)
+	stmt, err := s.DB.Prepare(query)
+	if err != nil {
+		return err
+	}
+
+	defer stmt.Close()
+
+	_, err = stmt.Exec()
+	if err != nil {
+		return fmt.Errorf("Error deleting patient: %v", err)
+	}
+
+	return nil
+}
