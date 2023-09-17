@@ -5,6 +5,6 @@ type Patient struct {
 	Name             string `json:"name"`
 	Surname          string `json:"surname"`
 	Address          string `json:"address"`
-	Dni              string `json:"dni" binding:"required"`
+	Dni              string `json:"dni"`
 	RegistrationDate string `json:"registration_date"`
 }

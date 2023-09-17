@@ -1,6 +1,9 @@
 package main
 
 import (
+	"net/http"
+	"os"
+
 	"github.com/bustafed/finalBackC4_G9/cmd/config"
 	"github.com/bustafed/finalBackC4_G9/cmd/external/database"
 	"github.com/bustafed/finalBackC4_G9/cmd/middlewares"
@@ -12,8 +15,6 @@ import (
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/swag/example/basic/docs"
-	"net/http"
-	"os"
 )
 
 func main() {
@@ -64,13 +65,19 @@ func main() {
 
 	patientsService := patients.NewService(myDatabase)
 
-	patientsHandler := handler.NewPatientsHandler(patientsService, patientsService)
+	patientsHandler := handler.NewPatientsHandler(patientsService, patientsService, patientsService)
 
 	patientsGroup := router.Group("/patients")
 
 	patientsGroup.GET("/:id", patientsHandler.GetPatientByID)
 
-	patientsGroup.PUT("/:id", authMidd.AuthHeader, patientsHandler.PutProduct)
+	patientsGroup.PUT("/:id", authMidd.AuthHeader, patientsHandler.PutPatient)
+
+	patientsGroup.PATCH("/:id", authMidd.AuthHeader, patientsHandler.ModifyPatientByProperty)
+
+	patientsGroup.POST("/", authMidd.AuthHeader, patientsHandler.CreatePatient)
+
+	patientsGroup.DELETE("/:id", authMidd.AuthHeader, patientsHandler.DeletePatientByID)
 
 	dentistService := dentists.NewService(myDatabase)
 
