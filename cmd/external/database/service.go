@@ -3,9 +3,10 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"log"
+
 	"github.com/bustafed/finalBackC4_G9/internal/dentists"
 	"github.com/bustafed/finalBackC4_G9/internal/patients"
-	"log"
 )
 
 type SqlStore struct {
@@ -29,7 +30,7 @@ func (s *SqlStore) GetPatientByID(id int) (patients.Patient, error) {
 	return patientReturn, nil
 }
 
-func (s *SqlStore) ModifyPatientByID(id int, patient patients.Patient) (patients.Patient, error) {
+func (s *SqlStore) UpdatePatientByID(id int, patient patients.Patient) (patients.Patient, error) {
 	query := fmt.Sprintf("UPDATE patients SET name = '%s', surname = '%s', address = '%s',"+
 		" dni = '%s', registration_date = '%s' WHERE id = %v;", patient.Name, patient.Surname,
 		patient.Address, patient.Dni, patient.RegistrationDate, id)
@@ -38,24 +39,6 @@ func (s *SqlStore) ModifyPatientByID(id int, patient patients.Patient) (patients
 		return patients.Patient{}, err
 	}
 
-	defer stmt.Close()
-
-	_, err = stmt.Exec()
-	if err != nil {
-		return patients.Patient{}, err
-	}
-
-	return patient, nil
-}
-
-func (s *SqlStore) ModifyPatientByProperty(id int, patient patients.Patient) (patients.Patient, error) {
-	query := fmt.Sprintf("UPDATE patients SET name = '%s', surname = '%s', address = '%s',"+
-		" dni = '%s', registration_date = '%s' WHERE id = %v;", patient.Name, patient.Surname,
-		patient.Address, patient.Dni, patient.RegistrationDate, id)
-	stmt, err := s.DB.Prepare(query)
-	if err != nil {
-		return patients.Patient{}, err
-	}
 	defer stmt.Close()
 
 	_, err = stmt.Exec()

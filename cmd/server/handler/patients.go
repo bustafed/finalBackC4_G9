@@ -14,7 +14,7 @@ type PatientsGetter interface {
 }
 
 type PatientCreator interface {
-	ModifyPatientByID(id int, patient patients.Patient) (patients.Patient, error)
+	UpdatePatientByID(id int, patient patients.Patient) (patients.Patient, error)
 	CreatePatient(patient patients.Patient) (patients.Patient, error)
 }
 type PatientDeleter interface {
@@ -95,7 +95,7 @@ func (ph *PatientsHandler) ModifyPatientByProperty(ctx *gin.Context) {
 		patient.RegistrationDate = patientRequest.RegistrationDate
 	}
 
-	updatedPatient, err := ph.patientsCreator.ModifyPatientByID(id, patient)
+	updatedPatient, err := ph.patientsCreator.UpdatePatientByID(id, patient)
 	if err != nil {
 		ctx.JSON(500, gin.H{"error": "internal error"})
 		return
@@ -125,7 +125,7 @@ func (ph *PatientsHandler) PutPatient(ctx *gin.Context) {
 	}
 	patientRequest.ID = id
 
-	patient, err := ph.patientsCreator.ModifyPatientByID(id, patientRequest)
+	patient, err := ph.patientsCreator.UpdatePatientByID(id, patientRequest)
 	if err != nil {
 		ctx.JSON(500, gin.H{"error": "internal error"})
 		return
