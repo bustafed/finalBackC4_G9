@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/bustafed/finalBackC4_G9/internal/dentists"
 	"github.com/bustafed/finalBackC4_G9/internal/patients"
+	"log"
 )
 
 type SqlStore struct {
@@ -26,18 +27,6 @@ func (s *SqlStore) GetPatientByID(id int) (patients.Patient, error) {
 		return patients.Patient{}, err
 	}
 	return patientReturn, nil
-}
-
-func (s *SqlStore) GetDentistByID(id int) (dentists.Dentist, error) {
-	var dentistReturn dentists.Dentist
-
-	query := fmt.Sprintf("SELECT * FROM dentists WHERE id = %d;", id)
-	row := s.DB.QueryRow(query)
-	err := row.Scan(&dentistReturn.ID, &dentistReturn.Name, &dentistReturn.Surname, &dentistReturn.License)
-	if err != nil {
-		return dentists.Dentist{}, err
-	}
-	return dentistReturn, nil
 }
 
 func (s *SqlStore) ModifyPatientByID(id int, patient patients.Patient) (patients.Patient, error) {
@@ -114,6 +103,18 @@ func (s *SqlStore) DeletePatientByID(id int) error {
 	}
 
 	return nil
+}
+
+func (s *SqlStore) GetDentistByID(id int) (dentists.Dentist, error) {
+	var dentistReturn dentists.Dentist
+
+	query := fmt.Sprintf("SELECT * FROM dentists WHERE id = %d;", id)
+	row := s.DB.QueryRow(query)
+	err := row.Scan(&dentistReturn.ID, &dentistReturn.Name, &dentistReturn.Surname, &dentistReturn.License)
+	if err != nil {
+		return dentists.Dentist{}, err
+	}
+	return dentistReturn, nil
 }
 
 func (s *SqlStore) CreateDentist(d dentists.Dentist) (dentists.Dentist, error) {
