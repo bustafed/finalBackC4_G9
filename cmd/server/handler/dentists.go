@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"github.com/bustafed/finalBackC4_G9/internal/dentists"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -12,18 +13,25 @@ type DentistsGetter interface {
 }
 
 type DentistCreator interface {
-	ModifyByID(id int, dentist dentists.Dentist) (dentists.Dentist, error)
+	CreateDentist(d dentists.Dentist) (dentists.Dentist, error)
+	UpdateDentistByID(id int, dentist dentists.Dentist) (dentists.Dentist, error)
+}
+
+type DentistDeleter interface {
+	DeleteDentistByID(id int) error
 }
 
 type DentistsHandler struct {
 	dentistsGetter  DentistsGetter
 	dentistsCreator DentistCreator
+	dentistDeleter  DentistDeleter
 }
 
-func NewDentistsHandler(getter DentistsGetter, creator DentistCreator) *DentistsHandler {
+func NewDentistsHandler(getter DentistsGetter, creator DentistCreator, deleter DentistDeleter) *DentistsHandler {
 	return &DentistsHandler{
 		dentistsGetter:  getter,
 		dentistsCreator: creator,
+		dentistDeleter:  deleter,
 	}
 }
 
@@ -43,16 +51,127 @@ func (dh *DentistsHandler) GetDentistByID(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
 		return
 	}
-	patient, err := dh.dentistsGetter.GetDentistByID(id)
+	dentist, err := dh.dentistsGetter.GetDentistByID(id)
 	if err != nil {
 		ctx.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return
 	}
-	ctx.JSON(http.StatusOK, patient)
+	ctx.JSON(http.StatusOK, dentist)
 }
 
-func (dh *DentistsHandler) PutDentist(context *gin.Context) {
+func (dh *DentistsHandler) FullUpdateDentistByID(ctx *gin.Context) {
+	idParam := ctx.Param("id")
+	id, err := strconv.Atoi(idParam)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
+		return
+	}
+	_, err = dh.dentistsGetter.GetDentistByID(id)
+	if err != nil {
+		ctx.JSON(http.StatusNotFound, gin.H{"error": "dentist doesn't exist"})
+		return
+	}
 
+	dentistRequest := dentists.Dentist{}
+	err = ctx.BindJSON(&dentistRequest)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if dentistRequest.Name == "" || dentistRequest.Surname == "" || dentistRequest.License == "" {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "dentist field missing, check sent JSON"})
+		return
+	}
+
+	dentist, err := dh.dentistsCreator.UpdateDentistByID(id, dentistRequest)
+	if err != nil {
+		ctx.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+		return
+	}
+	ctx.JSON(http.StatusOK, dentist)
+}
+
+func (dh *DentistsHandler) UpdateDentistByID(ctx *gin.Context) {
+	idParam := ctx.Param("id")
+	id, err := strconv.Atoi(idParam)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
+		return
+	}
+	dentist, err := dh.dentistsGetter.GetDentistByID(id)
+	if err != nil {
+		ctx.JSON(http.StatusNotFound, gin.H{"error": "dentist doesn't exist"})
+		return
+	}
+
+	dentistRequest := dentists.Dentist{}
+	err = ctx.BindJSON(&dentistRequest)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if dentistRequest.Name == "" && dentistRequest.Surname == "" && dentistRequest.License == "" {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "dentist field missing, check sent JSON"})
+		return
+	}
+
+	if dentistRequest.Name == "" {
+		dentistRequest.Name = dentist.Name
+	}
+	if dentistRequest.Surname == "" {
+		dentistRequest.Surname = dentist.Surname
+	}
+	if dentistRequest.License == "" {
+		dentistRequest.License = dentist.License
+	}
+
+	dentist, err = dh.dentistsCreator.UpdateDentistByID(id, dentistRequest)
+	if err != nil {
+		ctx.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+		return
+	}
+	ctx.JSON(http.StatusOK, dentist)
+}
+
+func (dh *DentistsHandler) CreateDentist(ctx *gin.Context) {
+	dentistRequest := dentists.Dentist{}
+	err := ctx.BindJSON(&dentistRequest)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	if dentistRequest.Name == "" || dentistRequest.Surname == "" || dentistRequest.License == "" {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "dentist field missing, check sent JSON"})
+		return
+	}
+
+	dentist, err := dh.dentistsCreator.CreateDentist(dentistRequest)
+	if err != nil {
+		ctx.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+		return
+	}
+	ctx.JSON(http.StatusOK, dentist)
+}
+
+func (dh *DentistsHandler) DeleteDentistByID(ctx *gin.Context) {
+	idParam := ctx.Param("id")
+	id, err := strconv.Atoi(idParam)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "invalid id"})
+		return
+	}
+	_, err = dh.dentistsGetter.GetDentistByID(id)
+	if err != nil {
+		ctx.JSON(http.StatusNotFound, gin.H{"error": "dentist doesn't exist"})
+		return
+	}
+
+	err = dh.dentistDeleter.DeleteDentistByID(id)
+	if err != nil {
+		ctx.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+		return
+	}
+	ctx.JSON(http.StatusOK, fmt.Sprintf("dentist with ID: %v deleted", id))
 }
 
 /*

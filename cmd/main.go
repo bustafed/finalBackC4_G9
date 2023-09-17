@@ -81,13 +81,19 @@ func main() {
 
 	dentistService := dentists.NewService(myDatabase)
 
-	dentistsHandler := handler.NewDentistsHandler(dentistService, dentistService)
+	dentistsHandler := handler.NewDentistsHandler(dentistService, dentistService, dentistService)
 
 	dentistsGroup := router.Group("/dentists")
 
 	dentistsGroup.GET("/:id", dentistsHandler.GetDentistByID)
 
-	dentistsGroup.PUT("/:id", authMidd.AuthHeader, dentistsHandler.PutDentist)
+	dentistsGroup.POST("/", authMidd.AuthHeader, dentistsHandler.CreateDentist)
+
+	dentistsGroup.PUT("/:id", authMidd.AuthHeader, dentistsHandler.FullUpdateDentistByID)
+
+	dentistsGroup.PATCH("/:id", authMidd.AuthHeader, dentistsHandler.UpdateDentistByID)
+
+	dentistsGroup.DELETE("/:id", authMidd.AuthHeader, dentistsHandler.DeleteDentistByID)
 
 	err = router.Run()
 
