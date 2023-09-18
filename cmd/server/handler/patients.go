@@ -39,7 +39,9 @@ func NewPatientsHandler(getter PatientsGetter, creator PatientCreator, deleter P
 // @Summary      Gets a Patient by id
 // @Description  Gets a Patient by id using the repository principal
 // @Tags         Patient
-// @Produce      json
+// @Produce      application/json
+// @Param        PUBLIC-KEY header string true "publicKey"
+// @Param        PRIVATE-KEY header string true "privateKey"
 // @Param        id path string true "ID"
 // @Success      200 {object} patients.Patient
 // @Responses:
@@ -69,7 +71,9 @@ func (ph *PatientsHandler) GetPatientByID(ctx *gin.Context) {
 // @Summary      Updates a Patient by id
 // @Description  Updates a Patient by ID, you may be noticed is not required to send data in all of the fields
 // @Tags         Patient
-// @Produce      json
+// @Produce      application/json
+// @Param        PUBLIC-KEY header string true "publicKey"
+// @Param        PRIVATE-KEY header string true "privateKey"
 // @Param        id path string true "ID"
 // @Success      200 {object} patients.Patient (updated)
 // @Responses:
@@ -129,7 +133,9 @@ func (ph *PatientsHandler) ModifyPatientByProperty(ctx *gin.Context) {
 // @Summary      Updates a Patient by id
 // @Description  Updates a Patient by ID, you must send all of the patient fields to process your request
 // @Tags         Patient
-// @Produce      json
+// @Produce      application/json
+// @Param        PUBLIC-KEY header string true "publicKey"
+// @Param        PRIVATE-KEY header string true "privateKey"
 // @Param        id path string true "ID"
 // @Success      200 {object} patients.Patient (updated)
 // @Responses:
@@ -173,8 +179,10 @@ func (ph *PatientsHandler) PutPatient(ctx *gin.Context) {
 // @Summary      Creates a Patient
 // @Description  Creates a Patient, you must send the fields required to process your request they are name, surname, address, dni, and registration date.
 // @Tags         Patient
-// @Produce      json
-// @Param        id path string true "ID"
+// @Produce      application/json
+// @Param        PUBLIC-KEY header string true "publicKey"
+// @Param        PRIVATE-KEY header string true "privateKey"
+// @Param        Patient body patients.Patient true "create Patient"
 // @Success      200 {object} patients.Patient
 // @Responses:
 //
@@ -208,7 +216,9 @@ func (ph *PatientsHandler) CreatePatient(ctx *gin.Context) {
 // @Summary      Deletes a Patient by id
 // @Description  Deletes a Patient by ID, be careful with this option!
 // @Tags         Patient
-// @Produce      json
+// @Produce      application/json
+// @Param        PUBLIC-KEY header string true "publicKey"
+// @Param        PRIVATE-KEY header string true "privateKey"
 // @Param        id path string true "ID"
 // @Success      200 {object} patients.Patient (updated)
 // @Responses:

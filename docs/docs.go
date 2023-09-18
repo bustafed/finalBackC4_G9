@@ -34,10 +34,26 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "ID",
-                        "name": "id",
-                        "in": "path",
+                        "description": "publicKey",
+                        "name": "PUBLIC-KEY",
+                        "in": "header",
                         "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "privateKey",
+                        "name": "PRIVATE-KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "Create Dentist",
+                        "name": "Dentist",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dentists.Dentist"
+                        }
                     }
                 ],
                 "responses": {
@@ -61,6 +77,20 @@ const docTemplate = `{
                 ],
                 "summary": "Gets a Dentist by id",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "publicKey",
+                        "name": "PUBLIC-KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "privateKey",
+                        "name": "PRIVATE-KEY",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "ID",
@@ -90,6 +120,20 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "publicKey",
+                        "name": "PUBLIC-KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "privateKey",
+                        "name": "PRIVATE-KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
                         "description": "ID",
                         "name": "id",
                         "in": "path",
@@ -117,6 +161,20 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "publicKey",
+                        "name": "PUBLIC-KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "privateKey",
+                        "name": "PRIVATE-KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
                         "description": "ID",
                         "name": "id",
                         "in": "path",
@@ -142,6 +200,20 @@ const docTemplate = `{
                 ],
                 "summary": "Updates a Dentist by id",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "publicKey",
+                        "name": "PUBLIC-KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "privateKey",
+                        "name": "PRIVATE-KEY",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "ID",
@@ -173,10 +245,26 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "ID",
-                        "name": "id",
-                        "in": "path",
+                        "description": "publicKey",
+                        "name": "PUBLIC-KEY",
+                        "in": "header",
                         "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "privateKey",
+                        "name": "PRIVATE-KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "create Patient",
+                        "name": "Patient",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/patients.Patient"
+                        }
                     }
                 ],
                 "responses": {
@@ -200,6 +288,20 @@ const docTemplate = `{
                 ],
                 "summary": "Gets a Patient by id",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "publicKey",
+                        "name": "PUBLIC-KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "privateKey",
+                        "name": "PRIVATE-KEY",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "ID",
@@ -229,6 +331,20 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "publicKey",
+                        "name": "PUBLIC-KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "privateKey",
+                        "name": "PRIVATE-KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
                         "description": "ID",
                         "name": "id",
                         "in": "path",
@@ -256,6 +372,20 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "description": "publicKey",
+                        "name": "PUBLIC-KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "privateKey",
+                        "name": "PRIVATE-KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
                         "description": "ID",
                         "name": "id",
                         "in": "path",
@@ -281,6 +411,20 @@ const docTemplate = `{
                 ],
                 "summary": "Updates a Patient by id",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "description": "publicKey",
+                        "name": "PUBLIC-KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "privateKey",
+                        "name": "PRIVATE-KEY",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "ID",

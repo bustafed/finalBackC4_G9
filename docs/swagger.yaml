@@ -41,11 +41,22 @@ paths:
       description: Creates a Dentist, you must send the fields required to process
         your request they are name, surname, address, dni, and registration date.
       parameters:
-      - description: ID
-        in: path
-        name: id
+      - description: publicKey
+        in: header
+        name: PUBLIC-KEY
         required: true
         type: string
+      - description: privateKey
+        in: header
+        name: PRIVATE-KEY
+        required: true
+        type: string
+      - description: Create Dentist
+        in: body
+        name: Dentist
+        required: true
+        schema:
+          $ref: '#/definitions/dentists.Dentist'
       produces:
       - application/json
       responses:
@@ -60,6 +71,16 @@ paths:
     delete:
       description: Deletes a Dentist by ID, be careful with this option!
       parameters:
+      - description: publicKey
+        in: header
+        name: PUBLIC-KEY
+        required: true
+        type: string
+      - description: privateKey
+        in: header
+        name: PRIVATE-KEY
+        required: true
+        type: string
       - description: ID
         in: path
         name: id
@@ -78,6 +99,16 @@ paths:
     get:
       description: Gets a Dentist by id using the repository principal
       parameters:
+      - description: publicKey
+        in: header
+        name: PUBLIC-KEY
+        required: true
+        type: string
+      - description: privateKey
+        in: header
+        name: PRIVATE-KEY
+        required: true
+        type: string
       - description: ID
         in: path
         name: id
@@ -97,6 +128,16 @@ paths:
       description: Updates a Dentist by id, you must send all of the dentist required
         fields to process your request
       parameters:
+      - description: publicKey
+        in: header
+        name: PUBLIC-KEY
+        required: true
+        type: string
+      - description: privateKey
+        in: header
+        name: PRIVATE-KEY
+        required: true
+        type: string
       - description: ID
         in: path
         name: id
@@ -116,6 +157,16 @@ paths:
       description: Updates a Dentist by id, you must send all of the dentist fields
         to process your request
       parameters:
+      - description: publicKey
+        in: header
+        name: PUBLIC-KEY
+        required: true
+        type: string
+      - description: privateKey
+        in: header
+        name: PRIVATE-KEY
+        required: true
+        type: string
       - description: ID
         in: path
         name: id
@@ -136,11 +187,22 @@ paths:
       description: Creates a Patient, you must send the fields required to process
         your request they are name, surname, address, dni, and registration date.
       parameters:
-      - description: ID
-        in: path
-        name: id
+      - description: publicKey
+        in: header
+        name: PUBLIC-KEY
         required: true
         type: string
+      - description: privateKey
+        in: header
+        name: PRIVATE-KEY
+        required: true
+        type: string
+      - description: create Patient
+        in: body
+        name: Patient
+        required: true
+        schema:
+          $ref: '#/definitions/patients.Patient'
       produces:
       - application/json
       responses:
@@ -155,6 +217,16 @@ paths:
     delete:
       description: Deletes a Patient by ID, be careful with this option!
       parameters:
+      - description: publicKey
+        in: header
+        name: PUBLIC-KEY
+        required: true
+        type: string
+      - description: privateKey
+        in: header
+        name: PRIVATE-KEY
+        required: true
+        type: string
       - description: ID
         in: path
         name: id
@@ -173,6 +245,16 @@ paths:
     get:
       description: Gets a Patient by id using the repository principal
       parameters:
+      - description: publicKey
+        in: header
+        name: PUBLIC-KEY
+        required: true
+        type: string
+      - description: privateKey
+        in: header
+        name: PRIVATE-KEY
+        required: true
+        type: string
       - description: ID
         in: path
         name: id
@@ -192,6 +274,16 @@ paths:
       description: Updates a Patient by ID, you may be noticed is not required to
         send data in all of the fields
       parameters:
+      - description: publicKey
+        in: header
+        name: PUBLIC-KEY
+        required: true
+        type: string
+      - description: privateKey
+        in: header
+        name: PRIVATE-KEY
+        required: true
+        type: string
       - description: ID
         in: path
         name: id
@@ -211,6 +303,16 @@ paths:
       description: Updates a Patient by ID, you must send all of the patient fields
         to process your request
       parameters:
+      - description: publicKey
+        in: header
+        name: PUBLIC-KEY
+        required: true
+        type: string
+      - description: privateKey
+        in: header
+        name: PRIVATE-KEY
+        required: true
+        type: string
       - description: ID
         in: path
         name: id

@@ -2,8 +2,9 @@ package middlewares
 
 import (
 	"errors"
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 type Auth struct {
@@ -19,7 +20,7 @@ func NewAuth(publicKey, privateKey string) *Auth {
 
 func (a *Auth) AuthHeader(ctx *gin.Context) {
 	headerPublicKey := ctx.GetHeader("PUBLIC-KEY")
-	privateKey := ctx.GetHeader("PRIVATE-KEY")
+	privateKey := ctx.GetHeader("SECRET_KEY")
 
 	if a.publicKey != headerPublicKey || a.privateKey != privateKey {
 		ctx.AbortWithError(http.StatusUnauthorized, errors.New("unauthorized access"))

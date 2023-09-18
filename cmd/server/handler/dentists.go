@@ -40,7 +40,9 @@ func NewDentistsHandler(getter DentistsGetter, creator DentistCreator, deleter D
 // @Summary      Gets a Dentist by id
 // @Description  Gets a Dentist by id using the repository principal
 // @Tags         Dentist
-// @Produce      json
+// @Produce      application/json
+// @Param        PUBLIC-KEY header string true "publicKey"
+// @Param        PRIVATE-KEY header string true "privateKey"
 // @Param        id path string true "ID"
 // @Success      200 {object} dentists.Dentist
 // @Responses:
@@ -70,7 +72,9 @@ func (dh *DentistsHandler) GetDentistByID(ctx *gin.Context) {
 // @Summary      Updates a Dentist by id
 // @Description  Updates a Dentist by id, you must send all of the dentist fields to process your request
 // @Tags         Dentist
-// @Produce      json
+// @Produce      application/json
+// @Param        PUBLIC-KEY header string true "publicKey"
+// @Param        PRIVATE-KEY header string true "privateKey"
 // @Param        id path string true "ID"
 // @Success      200 {object} dentists.Dentist
 // @Responses:
@@ -117,7 +121,9 @@ func (dh *DentistsHandler) FullUpdateDentistByID(ctx *gin.Context) {
 // @Summary      Updates a Dentist by id
 // @Description  Updates a Dentist by id, you must send all of the dentist required fields to process your request
 // @Tags         Dentist
-// @Produce      json
+// @Produce      application/json
+// @Param        PUBLIC-KEY header string true "publicKey"
+// @Param        PRIVATE-KEY header string true "privateKey"
 // @Param        id path string true "ID"
 // @Success      200 {object} dentists.Dentist
 // @Responses:
@@ -174,8 +180,10 @@ func (dh *DentistsHandler) UpdateDentistByID(ctx *gin.Context) {
 // @Summary      Creates a Dentist
 // @Description  Creates a Dentist, you must send the fields required to process your request they are name, surname, address, dni, and registration date.
 // @Tags         Dentist
-// @Produce      json
-// @Param        id path string true "ID"
+// @Produce      application/json
+// @Param        PUBLIC-KEY header string true "publicKey"
+// @Param        PRIVATE-KEY header string true "privateKey"
+// @Param        Dentist body dentists.Dentist true "Create Dentist"
 // @Success      200 {object} dentists.Dentist
 // @Responses:
 //
@@ -208,7 +216,9 @@ func (dh *DentistsHandler) CreateDentist(ctx *gin.Context) {
 // @Summary      Deletes a Dentist by id
 // @Description  Deletes a Dentist by ID, be careful with this option!
 // @Tags         Dentist
-// @Produce      json
+// @Produce      application/json
+// @Param        PUBLIC-KEY header string true "publicKey"
+// @Param        PRIVATE-KEY header string true "privateKey"
 // @Param        id path string true "ID"
 // @Success      200 {object} dentists.Dentist (updated)
 // @Responses:

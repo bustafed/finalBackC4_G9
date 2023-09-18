@@ -8,13 +8,13 @@ import (
 	"github.com/bustafed/finalBackC4_G9/cmd/external/database"
 	"github.com/bustafed/finalBackC4_G9/cmd/middlewares"
 	"github.com/bustafed/finalBackC4_G9/cmd/server/handler"
+	"github.com/bustafed/finalBackC4_G9/docs"
 	"github.com/bustafed/finalBackC4_G9/internal/dentists"
 	"github.com/bustafed/finalBackC4_G9/internal/patients"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	"github.com/swaggo/swag/example/basic/docs"
 )
 
 // @title Proyecto Final Especialización backend 3
