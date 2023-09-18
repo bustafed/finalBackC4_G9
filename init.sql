@@ -36,9 +36,11 @@ CREATE TABLE appointments
     date VARCHAR(128) NOT NULL,
     description VARCHAR(128) NOT NULL,
     CONSTRAINT FK_appointment_dentist FOREIGN KEY(dentist_id)
-    REFERENCES dentists(id),
-    CONSTRAINT FK_appointment_patient FOREIGN KEY(patient_id)
     REFERENCES dentists(id)
+    ON DELETE CASCADE,
+    CONSTRAINT FK_appointment_patient FOREIGN KEY(patient_id)
+    REFERENCES patients(id)
+    ON DELETE CASCADE
 );
 
 INSERT INTO appointments (dentist_id, patient_id, date, description)

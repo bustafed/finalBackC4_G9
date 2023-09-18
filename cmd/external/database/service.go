@@ -240,52 +240,54 @@ func (s *SqlStore) GetAppointmentByDni(dni string) ([]appointments.Appointment, 
 }
 
 
-func (s *SqlStore) CreateAppointment(d appointments.Appointment) (appointments.Appointment, error) {
+func (s *SqlStore) CreateAppointment(a appointments.Appointment) (appointments.Appointment, error) {
 	
-	dentistFound, err := s.GetDentistByLicense(d.Dentist.License)
+	dentistFound, err := s.GetDentistByLicense(a.Dentist.License)
 	if err != nil {
 		return appointments.Appointment{}, err
 	}
-	d.Dentist = dentistFound
+	a.Dentist = dentistFound
 
-	patientFound, err := s.GetPatientByDni(d.Patient.Dni)
+	patientFound, err := s.GetPatientByDni(a.Patient.Dni)
 	if err != nil {
 		return appointments.Appointment{}, err
 	}
-	d.Patient = patientFound
+	a.Patient = patientFound
 
 	stmt, err := s.DB.Prepare("INSERT INTO appointments (dentist_id, patient_id, date, description) VALUES ($1, $2, $3, $4) RETURNING id")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer stmt.Close()
-	
+	fmt.Println(a)
 	var insertedId int
-	err = stmt.QueryRow(d.Dentist.ID, d.Patient.ID, d.Date, d.Description).Scan(&insertedId)
+	err = stmt.QueryRow(a.Dentist.ID, a.Patient.ID, a.Date, a.Description).Scan(&insertedId)
 	
 	if err != nil {
 		return appointments.Appointment{}, err
 	}
 	
-	d.ID = insertedId
-	return d, nil
+	a.ID = insertedId
+	return a, nil
 }
 
-/*
-func (s *SqlStore) UpdateAppointmentByID(id int, d appointments.Appointment) (appointments.Appointment, error) {
-	stmt, err := s.DB.Prepare("UPDATE appointments SET name = $1, surname = $2, license = $3 WHERE id = $4")
+
+func (s *SqlStore) UpdateAppointmentByID(id int, a appointments.Appointment) (appointments.Appointment, error) {
+	stmt, err := s.DB.Prepare("UPDATE appointments SET dentist_id = $1, patient_id = $2, date = $3, description = $4 WHERE id = $5")
 	if err != nil {
-		log.Fatal(err)
+		return appointments.Appointment{}, err
+
 	}
 	defer stmt.Close()
 
-	_, err = stmt.Query(d.Name, d.Surname, d.License, id)
+	_, err = stmt.Query(a.Dentist.ID, a.Patient.ID, a.Date, a.Description, id)
 	if err != nil {
 		return appointments.Appointment{}, err
 	}
-	d.ID = id
-	return d, nil
+	a.ID = id
+	return a, nil
 }
+
 
 func (s *SqlStore) DeleteAppointmentByID(id int) error {
 	stmt, err := s.DB.Prepare("DELETE FROM appointments WHERE id = $1")
@@ -300,4 +302,3 @@ func (s *SqlStore) DeleteAppointmentByID(id int) error {
 	}
 	return nil
 }
-*/

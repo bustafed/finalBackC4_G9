@@ -108,11 +108,11 @@ func main() {
 
 	appointmentsGroup.POST("/", authMidd.AuthHeader, appointmentsHandler.CreateAppointment)
 
-	//  appointmentsGroup.PUT("/:id", authMidd.AuthHeader, appointmentsHandler.FullUpdateAppointmentByID)
+	 appointmentsGroup.PUT("/:id", authMidd.AuthHeader, appointmentsHandler.FullUpdateAppointmentByID)
 
-	// appointmentsGroup.PATCH("/:id", authMidd.AuthHeader, appointmentsHandler.UpdateAppointmentByID)
+	appointmentsGroup.PATCH("/:id", authMidd.AuthHeader, appointmentsHandler.UpdateAppointmentByID)
 
-	// appointmentsGroup.DELETE("/:id", authMidd.AuthHeader, appointmentsHandler.DeleteAppointmentByID)
+	appointmentsGroup.DELETE("/:id", authMidd.AuthHeader, appointmentsHandler.DeleteAppointmentByID)
 
 	err = router.Run()
 
