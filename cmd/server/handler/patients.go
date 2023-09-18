@@ -35,15 +35,21 @@ func NewPatientsHandler(getter PatientsGetter, creator PatientCreator, deleter P
 	}
 }
 
-// GetProductByID godoc
-// @Summary      Gets a product by id
-// @Description  Gets a product by id from the repository
-// @Tags         products
+// GetPatientByID godoc
+// @Summary      Gets a Patient by id
+// @Description  Gets a Patient by id using the repository principal
+// @Tags         Patient
 // @Produce      json
 // @Param        id path string true "ID"
 // @Success      200 {object} patients.Patient
-// @Router       /products/{id} [get]
-
+// @Responses:
+//
+//	200: {object} patients.Patient (updated)
+//	400: Your the id passed is in the wrong format
+//	404: The patient with the given id was not found
+//	500: Internal error occured
+//
+// @Router       /patients/{id} [get]
 func (ph *PatientsHandler) GetPatientByID(ctx *gin.Context) {
 	idParam := ctx.Param("id")
 	id, err := strconv.Atoi(idParam)
@@ -59,6 +65,21 @@ func (ph *PatientsHandler) GetPatientByID(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, patient)
 }
 
+// UpdatePatientByID godoc
+// @Summary      Updates a Patient by id
+// @Description  Updates a Patient by ID, you may be noticed is not required to send data in all of the fields
+// @Tags         Patient
+// @Produce      json
+// @Param        id path string true "ID"
+// @Success      200 {object} patients.Patient (updated)
+// @Responses:
+//
+//	200: {object} patients.Patient (updated)
+//	400: The id passed is in the wrong format
+//	404: The patient with the given id was not found
+//	500: Internal error occured
+//
+// @Router       /patients/{id} [patch]
 func (ph *PatientsHandler) ModifyPatientByProperty(ctx *gin.Context) {
 	idParam := ctx.Param("id")
 	id, err := strconv.Atoi(idParam)
@@ -104,6 +125,21 @@ func (ph *PatientsHandler) ModifyPatientByProperty(ctx *gin.Context) {
 
 }
 
+// UpdatePatientByID godoc
+// @Summary      Updates a Patient by id
+// @Description  Updates a Patient by ID, you must send all of the patient fields to process your request
+// @Tags         Patient
+// @Produce      json
+// @Param        id path string true "ID"
+// @Success      200 {object} patients.Patient (updated)
+// @Responses:
+//
+//	200: {object} patients.Patient (updated)
+//	400: Either the request wasn't valid or all of the required fields weren't sent
+//	404: The patient with the given id was not found
+//	500: Internal error occured
+//
+// @Router       /patients/{id} [put]
 func (ph *PatientsHandler) PutPatient(ctx *gin.Context) {
 	idParam := ctx.Param("id")
 	id, err := strconv.Atoi(idParam)
@@ -133,6 +169,20 @@ func (ph *PatientsHandler) PutPatient(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, patient)
 }
 
+// CreatePatient godoc
+// @Summary      Creates a Patient
+// @Description  Creates a Patient, you must send the fields required to process your request they are name, surname, address, dni, and registration date.
+// @Tags         Patient
+// @Produce      json
+// @Param        id path string true "ID"
+// @Success      200 {object} patients.Patient
+// @Responses:
+//
+//	200: {object} patients.Patient
+//	400: Either the request wasn't valid or all of the required fields weren't sent
+//	500: Internal error occured
+//
+// @Router       /patients [post]
 func (ph *PatientsHandler) CreatePatient(ctx *gin.Context) {
 	patientRequest := patients.Patient{}
 	err := ctx.ShouldBindJSON(&patientRequest)
@@ -154,6 +204,21 @@ func (ph *PatientsHandler) CreatePatient(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, patient)
 }
 
+// DeletePatientByID godoc
+// @Summary      Deletes a Patient by id
+// @Description  Deletes a Patient by ID, be careful with this option!
+// @Tags         Patient
+// @Produce      json
+// @Param        id path string true "ID"
+// @Success      200 {object} patients.Patient (updated)
+// @Responses:
+//
+//	200: {object} patients.Patient (updated)
+//	400: The id passed is in the wrong format
+//	404: The patient with the given id was not found
+//	500: Internal error occured
+//
+// @Router       /patients/{id} [delete]
 func (ph *PatientsHandler) DeletePatientByID(ctx *gin.Context) {
 	idParam := ctx.Param("id")
 	id, err := strconv.Atoi(idParam)

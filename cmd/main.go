@@ -17,6 +17,14 @@ import (
 	"github.com/swaggo/swag/example/basic/docs"
 )
 
+// @title Proyecto Final Especialización backend 3
+// @version 1.0
+// @description Este es el proyecto final de la materia espcialización backend 3 para crear, editar, consultar y borrar las entidades de paciente, dentista y turnos.
+
+// @contact.name API Support (Natalia Garcia, Federico Bustamante, Damian, Camilo Zuleta)
+
+// @license.name Apache 2.0
+// @license.url http:www.apache.org/licenses/LICENSE-2.0.html
 func main() {
 
 	env := os.Getenv("ENV")
