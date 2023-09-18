@@ -1,4 +1,17 @@
 definitions:
+  appointments.Appointment:
+    properties:
+      date:
+        type: string
+      dentist:
+        $ref: '#/definitions/dentists.Dentist'
+      description:
+        type: string
+      id:
+        type: integer
+      patient:
+        $ref: '#/definitions/patients.Patient'
+    type: object
   dentists.Dentist:
     properties:
       id:
@@ -36,10 +49,174 @@ info:
   title: Proyecto Final Especialización backend 3
   version: "1.0"
 paths:
+  /appointments:
+    post:
+      description: Creates an Appointment, you must send the fields required to process
+        your request Patient, Dentist, Date, Description
+      parameters:
+      - description: publicKey
+        in: header
+        name: PUBLIC-KEY
+        required: true
+        type: string
+      - description: secretKey
+        in: header
+        name: SECRET_KEY
+        required: true
+        type: string
+      - description: Create Appointment
+        in: body
+        name: Appointment
+        required: true
+        schema:
+          $ref: '#/definitions/appointments.Appointment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/appointments.Appointment'
+      summary: Creates an Appointment
+      tags:
+      - Appointment
+  /appointments/{id}:
+    delete:
+      description: Deletes an Appointment by id, be careful with this action.
+      parameters:
+      - description: publicKey
+        in: header
+        name: PUBLIC-KEY
+        required: true
+        type: string
+      - description: secretKey
+        in: header
+        name: SECRET_KEY
+        required: true
+        type: string
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Delete Appointment
+        in: body
+        name: Appointment
+        required: true
+        schema:
+          $ref: '#/definitions/appointments.Appointment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/appointments.Appointment'
+      summary: Deletes an Appointment by id
+      tags:
+      - Appointment
+    get:
+      description: Gets all appointments if any by patient dni
+      parameters:
+      - description: publicKey
+        in: header
+        name: PUBLIC-KEY
+        required: true
+        type: string
+      - description: secretKey
+        in: header
+        name: SECRET_KEY
+        required: true
+        type: string
+      - description: DNI
+        in: path
+        name: DNI
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/appointments.Appointment'
+      summary: Gets all appointments by dni
+      tags:
+      - Appointment
+    patch:
+      description: Updates an Appointment by id, you can send only the appointment
+        fields you need to change
+      parameters:
+      - description: publicKey
+        in: header
+        name: PUBLIC-KEY
+        required: true
+        type: string
+      - description: secretKey
+        in: header
+        name: SECRET_KEY
+        required: true
+        type: string
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update Appointment
+        in: body
+        name: Appointment
+        required: true
+        schema:
+          $ref: '#/definitions/appointments.Appointment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/appointments.Appointment'
+      summary: Updates an Appointment by id
+      tags:
+      - Appointment
+    put:
+      description: Updates an Appointment by id, you must send all of the appointment
+        fields to process your request
+      parameters:
+      - description: publicKey
+        in: header
+        name: PUBLIC-KEY
+        required: true
+        type: string
+      - description: secretKey
+        in: header
+        name: SECRET_KEY
+        required: true
+        type: string
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update Appointment
+        in: body
+        name: Appointment
+        required: true
+        schema:
+          $ref: '#/definitions/appointments.Appointment'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/appointments.Appointment'
+      summary: Updates an Appointment by id
+      tags:
+      - Appointment
   /dentists:
     post:
       description: Creates a Dentist, you must send the fields required to process
-        your request they are name, surname, address, dni, and registration date.
+        your request they are name, surname and license
       parameters:
       - description: publicKey
         in: header
@@ -143,6 +320,12 @@ paths:
         name: id
         required: true
         type: string
+      - description: update Dentist
+        in: body
+        name: Dentist
+        required: true
+        schema:
+          $ref: '#/definitions/dentists.Dentist'
       produces:
       - application/json
       responses:
@@ -172,6 +355,12 @@ paths:
         name: id
         required: true
         type: string
+      - description: update Dentist
+        in: body
+        name: Dentist
+        required: true
+        schema:
+          $ref: '#/definitions/dentists.Dentist'
       produces:
       - application/json
       responses:
@@ -289,6 +478,12 @@ paths:
         name: id
         required: true
         type: string
+      - description: update Patient
+        in: body
+        name: Patient
+        required: true
+        schema:
+          $ref: '#/definitions/patients.Patient'
       produces:
       - application/json
       responses:
@@ -318,6 +513,12 @@ paths:
         name: id
         required: true
         type: string
+      - description: update Patient
+        in: body
+        name: Patient
+        required: true
+        schema:
+          $ref: '#/definitions/patients.Patient'
       produces:
       - application/json
       responses:

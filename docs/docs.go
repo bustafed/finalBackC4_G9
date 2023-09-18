@@ -21,9 +21,247 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/appointments": {
+            "post": {
+                "description": "Creates an Appointment, you must send the fields required to process your request Patient, Dentist, Date, Description",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Appointment"
+                ],
+                "summary": "Creates an Appointment",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "publicKey",
+                        "name": "PUBLIC-KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "secretKey",
+                        "name": "SECRET_KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "Create Appointment",
+                        "name": "Appointment",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/appointments.Appointment"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/appointments.Appointment"
+                        }
+                    }
+                }
+            }
+        },
+        "/appointments/{id}": {
+            "get": {
+                "description": "Gets all appointments if any by patient dni",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Appointment"
+                ],
+                "summary": "Gets all appointments by dni",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "publicKey",
+                        "name": "PUBLIC-KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "secretKey",
+                        "name": "SECRET_KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "DNI",
+                        "name": "DNI",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/appointments.Appointment"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Updates an Appointment by id, you must send all of the appointment fields to process your request",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Appointment"
+                ],
+                "summary": "Updates an Appointment by id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "publicKey",
+                        "name": "PUBLIC-KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "secretKey",
+                        "name": "SECRET_KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update Appointment",
+                        "name": "Appointment",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/appointments.Appointment"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/appointments.Appointment"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Deletes an Appointment by id, be careful with this action.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Appointment"
+                ],
+                "summary": "Deletes an Appointment by id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "publicKey",
+                        "name": "PUBLIC-KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "secretKey",
+                        "name": "SECRET_KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Delete Appointment",
+                        "name": "Appointment",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/appointments.Appointment"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/appointments.Appointment"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Updates an Appointment by id, you can send only the appointment fields you need to change",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Appointment"
+                ],
+                "summary": "Updates an Appointment by id",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "publicKey",
+                        "name": "PUBLIC-KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "secretKey",
+                        "name": "SECRET_KEY",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update Appointment",
+                        "name": "Appointment",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/appointments.Appointment"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/appointments.Appointment"
+                        }
+                    }
+                }
+            }
+        },
         "/dentists": {
             "post": {
-                "description": "Creates a Dentist, you must send the fields required to process your request they are name, surname, address, dni, and registration date.",
+                "description": "Creates a Dentist, you must send the fields required to process your request they are name, surname and license",
                 "produces": [
                     "application/json"
                 ],
@@ -138,6 +376,15 @@ const docTemplate = `{
                         "name": "id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "update Dentist",
+                        "name": "Dentist",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dentists.Dentist"
+                        }
                     }
                 ],
                 "responses": {
@@ -220,6 +467,15 @@ const docTemplate = `{
                         "name": "id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "update Dentist",
+                        "name": "Dentist",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dentists.Dentist"
+                        }
                     }
                 ],
                 "responses": {
@@ -349,6 +605,15 @@ const docTemplate = `{
                         "name": "id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "update Patient",
+                        "name": "Patient",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/patients.Patient"
+                        }
                     }
                 ],
                 "responses": {
@@ -431,6 +696,15 @@ const docTemplate = `{
                         "name": "id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "update Patient",
+                        "name": "Patient",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/patients.Patient"
+                        }
                     }
                 ],
                 "responses": {
@@ -445,6 +719,26 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "appointments.Appointment": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string"
+                },
+                "dentist": {
+                    "$ref": "#/definitions/dentists.Dentist"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "patient": {
+                    "$ref": "#/definitions/patients.Patient"
+                }
+            }
+        },
         "dentists.Dentist": {
             "type": "object",
             "properties": {

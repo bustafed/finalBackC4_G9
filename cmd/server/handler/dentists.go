@@ -77,6 +77,7 @@ func (dh *DentistsHandler) GetDentistByID(ctx *gin.Context) {
 // @Param        PUBLIC-KEY header string true "publicKey"
 // @Param        SECRET_KEY header string true "secretKey"
 // @Param        id path string true "ID"
+// @Param        Dentist body dentists.Dentist true "update Dentist"
 // @Success      200 {object} dentists.Dentist
 // @Responses:
 //
@@ -127,6 +128,7 @@ func (dh *DentistsHandler) FullUpdateDentistByID(ctx *gin.Context) {
 // @Param        PUBLIC-KEY header string true "publicKey"
 // @Param        SECRET_KEY header string true "secretKey"
 // @Param        id path string true "ID"
+// @Param        Dentist body dentists.Dentist true "update Dentist"
 // @Success      200 {object} dentists.Dentist
 // @Responses:
 //
@@ -181,7 +183,7 @@ func (dh *DentistsHandler) UpdateDentistByID(ctx *gin.Context) {
 
 // CreateDentist godoc
 // @Summary      Creates a Dentist
-// @Description  Creates a Dentist, you must send the fields required to process your request they are name, surname, address, dni, and registration date.
+// @Description  Creates a Dentist, you must send the fields required to process your request they are name, surname and license
 // @Tags         Dentist
 // @Produce      application/json
 // @Param        PUBLIC-KEY header string true "publicKey"

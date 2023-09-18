@@ -76,13 +76,14 @@ func (ph *PatientsHandler) GetPatientByID(ctx *gin.Context) {
 // @Param        PUBLIC-KEY header string true "publicKey"
 // @Param        SECRET_KEY header string true "secretKey"
 // @Param        id path string true "ID"
+// @Param        Patient body patients.Patient true "update Patient"
 // @Success      200 {object} patients.Patient (updated)
 // @Responses:
 //
 //	200: {object} patients.Patient (updated)
 //	400: The id passed is in the wrong format
 //	401: Either The PUBLIC-KEY or the SECRET-KEY or both are not correct
-//	404: The patient with the given id was not found
+//	404: The patient with the given id was notfound
 //	500: Internal error occured
 //
 // @Router       /patients/{id} [patch]
@@ -139,6 +140,7 @@ func (ph *PatientsHandler) ModifyPatientByProperty(ctx *gin.Context) {
 // @Param        PUBLIC-KEY header string true "publicKey"
 // @Param        SECRET_KEY header string true "secretKey"
 // @Param        id path string true "ID"
+// @Param        Patient body patients.Patient true "update Patient"
 // @Success      200 {object} patients.Patient (updated)
 // @Responses:
 //
