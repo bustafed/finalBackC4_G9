@@ -259,7 +259,7 @@ func (s *SqlStore) CreateAppointment(a appointments.Appointment) (appointments.A
 		log.Fatal(err)
 	}
 	defer stmt.Close()
-	fmt.Println(a)
+
 	var insertedId int
 	err = stmt.QueryRow(a.Dentist.ID, a.Patient.ID, a.Date, a.Description).Scan(&insertedId)
 	
