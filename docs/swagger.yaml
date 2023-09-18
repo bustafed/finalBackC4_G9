@@ -46,9 +46,9 @@ paths:
         name: PUBLIC-KEY
         required: true
         type: string
-      - description: privateKey
+      - description: secretKey
         in: header
-        name: PRIVATE-KEY
+        name: SECRET_KEY
         required: true
         type: string
       - description: Create Dentist
@@ -76,9 +76,9 @@ paths:
         name: PUBLIC-KEY
         required: true
         type: string
-      - description: privateKey
+      - description: secretKey
         in: header
-        name: PRIVATE-KEY
+        name: SECRET_KEY
         required: true
         type: string
       - description: ID
@@ -104,9 +104,9 @@ paths:
         name: PUBLIC-KEY
         required: true
         type: string
-      - description: privateKey
+      - description: secretKey
         in: header
-        name: PRIVATE-KEY
+        name: SECRET_KEY
         required: true
         type: string
       - description: ID
@@ -133,9 +133,9 @@ paths:
         name: PUBLIC-KEY
         required: true
         type: string
-      - description: privateKey
+      - description: secretKey
         in: header
-        name: PRIVATE-KEY
+        name: SECRET_KEY
         required: true
         type: string
       - description: ID
@@ -162,9 +162,9 @@ paths:
         name: PUBLIC-KEY
         required: true
         type: string
-      - description: privateKey
+      - description: secretKey
         in: header
-        name: PRIVATE-KEY
+        name: SECRET_KEY
         required: true
         type: string
       - description: ID
@@ -192,9 +192,9 @@ paths:
         name: PUBLIC-KEY
         required: true
         type: string
-      - description: privateKey
+      - description: secretKey
         in: header
-        name: PRIVATE-KEY
+        name: SECRET_KEY
         required: true
         type: string
       - description: create Patient
@@ -222,9 +222,9 @@ paths:
         name: PUBLIC-KEY
         required: true
         type: string
-      - description: privateKey
+      - description: secretKey
         in: header
-        name: PRIVATE-KEY
+        name: SECRET_KEY
         required: true
         type: string
       - description: ID
@@ -250,9 +250,9 @@ paths:
         name: PUBLIC-KEY
         required: true
         type: string
-      - description: privateKey
+      - description: secretKey
         in: header
-        name: PRIVATE-KEY
+        name: SECRET_KEY
         required: true
         type: string
       - description: ID
@@ -279,9 +279,9 @@ paths:
         name: PUBLIC-KEY
         required: true
         type: string
-      - description: privateKey
+      - description: secretKey
         in: header
-        name: PRIVATE-KEY
+        name: SECRET_KEY
         required: true
         type: string
       - description: ID
@@ -308,9 +308,9 @@ paths:
         name: PUBLIC-KEY
         required: true
         type: string
-      - description: privateKey
+      - description: secretKey
         in: header
-        name: PRIVATE-KEY
+        name: SECRET_KEY
         required: true
         type: string
       - description: ID

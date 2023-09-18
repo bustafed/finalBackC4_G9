@@ -41,13 +41,14 @@ func NewPatientsHandler(getter PatientsGetter, creator PatientCreator, deleter P
 // @Tags         Patient
 // @Produce      application/json
 // @Param        PUBLIC-KEY header string true "publicKey"
-// @Param        PRIVATE-KEY header string true "privateKey"
+// @Param        SECRET_KEY header string true "secretKey"
 // @Param        id path string true "ID"
 // @Success      200 {object} patients.Patient
 // @Responses:
 //
 //	200: {object} patients.Patient (updated)
 //	400: Your the id passed is in the wrong format
+//	401: Either The PUBLIC-KEY or the SECRET-KEY or both are not correct
 //	404: The patient with the given id was not found
 //	500: Internal error occured
 //
@@ -73,13 +74,14 @@ func (ph *PatientsHandler) GetPatientByID(ctx *gin.Context) {
 // @Tags         Patient
 // @Produce      application/json
 // @Param        PUBLIC-KEY header string true "publicKey"
-// @Param        PRIVATE-KEY header string true "privateKey"
+// @Param        SECRET_KEY header string true "secretKey"
 // @Param        id path string true "ID"
 // @Success      200 {object} patients.Patient (updated)
 // @Responses:
 //
 //	200: {object} patients.Patient (updated)
 //	400: The id passed is in the wrong format
+//	401: Either The PUBLIC-KEY or the SECRET-KEY or both are not correct
 //	404: The patient with the given id was not found
 //	500: Internal error occured
 //
@@ -135,13 +137,14 @@ func (ph *PatientsHandler) ModifyPatientByProperty(ctx *gin.Context) {
 // @Tags         Patient
 // @Produce      application/json
 // @Param        PUBLIC-KEY header string true "publicKey"
-// @Param        PRIVATE-KEY header string true "privateKey"
+// @Param        SECRET_KEY header string true "secretKey"
 // @Param        id path string true "ID"
 // @Success      200 {object} patients.Patient (updated)
 // @Responses:
 //
 //	200: {object} patients.Patient (updated)
 //	400: Either the request wasn't valid or all of the required fields weren't sent
+//	401: Either The PUBLIC-KEY or the SECRET-KEY or both are not correct
 //	404: The patient with the given id was not found
 //	500: Internal error occured
 //
@@ -181,13 +184,14 @@ func (ph *PatientsHandler) PutPatient(ctx *gin.Context) {
 // @Tags         Patient
 // @Produce      application/json
 // @Param        PUBLIC-KEY header string true "publicKey"
-// @Param        PRIVATE-KEY header string true "privateKey"
+// @Param        SECRET_KEY header string true "secretKey"
 // @Param        Patient body patients.Patient true "create Patient"
 // @Success      200 {object} patients.Patient
 // @Responses:
 //
 //	200: {object} patients.Patient
 //	400: Either the request wasn't valid or all of the required fields weren't sent
+//	401: Either The PUBLIC-KEY or the SECRET-KEY or both are not correct
 //	500: Internal error occured
 //
 // @Router       /patients [post]
@@ -218,13 +222,14 @@ func (ph *PatientsHandler) CreatePatient(ctx *gin.Context) {
 // @Tags         Patient
 // @Produce      application/json
 // @Param        PUBLIC-KEY header string true "publicKey"
-// @Param        PRIVATE-KEY header string true "privateKey"
+// @Param        SECRET_KEY header string true "secretKey"
 // @Param        id path string true "ID"
 // @Success      200 {object} patients.Patient (updated)
 // @Responses:
 //
 //	200: {object} patients.Patient (updated)
 //	400: The id passed is in the wrong format
+//	401: Either The PUBLIC-KEY or the SECRET-KEY or both are not correct
 //	404: The patient with the given id was not found
 //	500: Internal error occured
 //

@@ -41,8 +41,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "privateKey",
-                        "name": "PRIVATE-KEY",
+                        "description": "secretKey",
+                        "name": "SECRET_KEY",
                         "in": "header",
                         "required": true
                     },
@@ -86,8 +86,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "privateKey",
-                        "name": "PRIVATE-KEY",
+                        "description": "secretKey",
+                        "name": "SECRET_KEY",
                         "in": "header",
                         "required": true
                     },
@@ -127,8 +127,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "privateKey",
-                        "name": "PRIVATE-KEY",
+                        "description": "secretKey",
+                        "name": "SECRET_KEY",
                         "in": "header",
                         "required": true
                     },
@@ -168,8 +168,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "privateKey",
-                        "name": "PRIVATE-KEY",
+                        "description": "secretKey",
+                        "name": "SECRET_KEY",
                         "in": "header",
                         "required": true
                     },
@@ -209,8 +209,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "privateKey",
-                        "name": "PRIVATE-KEY",
+                        "description": "secretKey",
+                        "name": "SECRET_KEY",
                         "in": "header",
                         "required": true
                     },
@@ -252,8 +252,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "privateKey",
-                        "name": "PRIVATE-KEY",
+                        "description": "secretKey",
+                        "name": "SECRET_KEY",
                         "in": "header",
                         "required": true
                     },
@@ -297,8 +297,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "privateKey",
-                        "name": "PRIVATE-KEY",
+                        "description": "secretKey",
+                        "name": "SECRET_KEY",
                         "in": "header",
                         "required": true
                     },
@@ -338,8 +338,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "privateKey",
-                        "name": "PRIVATE-KEY",
+                        "description": "secretKey",
+                        "name": "SECRET_KEY",
                         "in": "header",
                         "required": true
                     },
@@ -379,8 +379,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "privateKey",
-                        "name": "PRIVATE-KEY",
+                        "description": "secretKey",
+                        "name": "SECRET_KEY",
                         "in": "header",
                         "required": true
                     },
@@ -420,8 +420,8 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "privateKey",
-                        "name": "PRIVATE-KEY",
+                        "description": "secretKey",
+                        "name": "SECRET_KEY",
                         "in": "header",
                         "required": true
                     },

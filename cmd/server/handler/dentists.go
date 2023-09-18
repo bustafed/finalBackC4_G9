@@ -42,13 +42,14 @@ func NewDentistsHandler(getter DentistsGetter, creator DentistCreator, deleter D
 // @Tags         Dentist
 // @Produce      application/json
 // @Param        PUBLIC-KEY header string true "publicKey"
-// @Param        PRIVATE-KEY header string true "privateKey"
+// @Param        SECRET_KEY header string true "secretKey"
 // @Param        id path string true "ID"
 // @Success      200 {object} dentists.Dentist
 // @Responses:
 //
 //	200: {object} dentists.Dentist (updated)
 //	400: The id passed is in the wrong format
+//	401: Either The PUBLIC-KEY or the SECRET-KEY or both are not correct
 //	404: The dentist with the given id was not found
 //	500: Internal error occured
 //
@@ -74,13 +75,14 @@ func (dh *DentistsHandler) GetDentistByID(ctx *gin.Context) {
 // @Tags         Dentist
 // @Produce      application/json
 // @Param        PUBLIC-KEY header string true "publicKey"
-// @Param        PRIVATE-KEY header string true "privateKey"
+// @Param        SECRET_KEY header string true "secretKey"
 // @Param        id path string true "ID"
 // @Success      200 {object} dentists.Dentist
 // @Responses:
 //
 //	200: {object} dentists.Dentist (updated)
 //	400: Either the id passed is in the wrong format or there are missing fields
+//	401: Either The PUBLIC-KEY or the SECRET-KEY or both are not correct
 //	404: The dentist with the given id was not found
 //	500: Internal error occurred
 //
@@ -123,13 +125,14 @@ func (dh *DentistsHandler) FullUpdateDentistByID(ctx *gin.Context) {
 // @Tags         Dentist
 // @Produce      application/json
 // @Param        PUBLIC-KEY header string true "publicKey"
-// @Param        PRIVATE-KEY header string true "privateKey"
+// @Param        SECRET_KEY header string true "secretKey"
 // @Param        id path string true "ID"
 // @Success      200 {object} dentists.Dentist
 // @Responses:
 //
 //	200: {object} dentists.Dentist (updated)
 //	400: Either the id passed is in the wrong format or there are missing fields
+//	401: Either The PUBLIC-KEY or the SECRET-KEY or both are not correct
 //	404: The dentist with the given id was not found
 //	500: Internal error occurred
 //
@@ -182,12 +185,13 @@ func (dh *DentistsHandler) UpdateDentistByID(ctx *gin.Context) {
 // @Tags         Dentist
 // @Produce      application/json
 // @Param        PUBLIC-KEY header string true "publicKey"
-// @Param        PRIVATE-KEY header string true "privateKey"
+// @Param        SECRET_KEY header string true "secretKey"
 // @Param        Dentist body dentists.Dentist true "Create Dentist"
 // @Success      200 {object} dentists.Dentist
 // @Responses:
 //
 //	200: {object} dentists.Dentist
+//	401: Either The PUBLIC-KEY or the SECRET-KEY or both are not correct
 //	400: Either the request wasn't valid or all of the required fields weren't sent
 //	500: Internal error occured
 //
@@ -218,13 +222,14 @@ func (dh *DentistsHandler) CreateDentist(ctx *gin.Context) {
 // @Tags         Dentist
 // @Produce      application/json
 // @Param        PUBLIC-KEY header string true "publicKey"
-// @Param        PRIVATE-KEY header string true "privateKey"
+// @Param        SECRET_KEY header string true "secretKey"
 // @Param        id path string true "ID"
 // @Success      200 {object} dentists.Dentist (updated)
 // @Responses:
 //
 //	200: {object} dentists.Dentist (updated)
 //	400: The id passed is in the wrong format
+//	401: Either The PUBLIC-KEY or the SECRET-KEY or both are not correct
 //	404: The Dentist with the given id was not found
 //	500: Internal error occured
 //
