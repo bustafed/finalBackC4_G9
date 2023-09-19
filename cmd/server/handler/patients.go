@@ -68,7 +68,7 @@ func (ph *PatientsHandler) GetPatientByID(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, patient)
 }
 
-// UpdatePatientByID godoc
+// ModifyPatientByProperty godoc
 // @Summary      Updates a Patient by id
 // @Description  Updates a Patient by ID, you may be noticed is not required to send data in all of the fields
 // @Tags         Patient
@@ -132,7 +132,7 @@ func (ph *PatientsHandler) ModifyPatientByProperty(ctx *gin.Context) {
 
 }
 
-// UpdatePatientByID godoc
+// PutPatient godoc
 // @Summary      Updates a Patient by id
 // @Description  Updates a Patient by ID, you must send all of the patient fields to process your request
 // @Tags         Patient
@@ -233,7 +233,7 @@ func (ph *PatientsHandler) CreatePatient(ctx *gin.Context) {
 //	400: The id passed is in the wrong format
 //	401: Either The PUBLIC-KEY or the SECRET-KEY or both are not correct
 //	404: The patient with the given id was not found
-//	500: Internal error occured
+//	500: Internal error occurred
 //
 // @Router       /patients/{id} [delete]
 func (ph *PatientsHandler) DeletePatientByID(ctx *gin.Context) {

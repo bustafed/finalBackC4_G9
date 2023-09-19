@@ -69,7 +69,7 @@ func (dh *DentistsHandler) GetDentistByID(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, dentist)
 }
 
-// UpdateDentistByID godoc
+// FullUpdateDentistByID godoc
 // @Summary      Updates a Dentist by id
 // @Description  Updates a Dentist by id, you must send all of the dentist fields to process your request
 // @Tags         Dentist
@@ -122,7 +122,7 @@ func (dh *DentistsHandler) FullUpdateDentistByID(ctx *gin.Context) {
 
 // UpdateDentistByID godoc
 // @Summary      Updates a Dentist by id
-// @Description  Updates a Dentist by id, you must send all of the dentist required fields to process your request
+// @Description  Updates a Dentist by id, you must send some of the dentist required fields to process your request
 // @Tags         Dentist
 // @Produce      application/json
 // @Param        PUBLIC-KEY header string true "publicKey"
@@ -256,26 +256,3 @@ func (dh *DentistsHandler) DeleteDentistByID(ctx *gin.Context) {
 	}
 	ctx.JSON(http.StatusOK, fmt.Sprintf("dentist with ID: %v deleted", id))
 }
-
-/*
-func (ph *ProductsHandler) PutProduct(ctx *gin.Context) {
-	idParam := ctx.Param("id")
-	id, err := strconv.Atoi(idParam)
-	if err != nil {
-		ctx.JSON(400, gin.H{"error": "invalid id"})
-		return
-	}
-	productRequest := patients.Patient{}
-	err = ctx.BindJSON(&productRequest)
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-	product, err := ph.productsCreator.ModifyByID(id, productRequest)
-	if err != nil {
-		ctx.JSON(500, gin.H{"error": "internal error"})
-		return
-	}
-	ctx.JSON(200, product)
-}
-*/

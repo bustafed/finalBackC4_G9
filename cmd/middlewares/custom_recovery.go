@@ -18,7 +18,5 @@ func RecoveryWithLog(ctx *gin.Context, err any) {
 
 	fmt.Printf("the time is %+v\n", time.Now())
 
-	fmt.Printf("the size of the request is %+v\n", ctx.Request.ContentLength)
-
 	ctx.AbortWithError(http.StatusInternalServerError, errors.New("internal server error"))
 }

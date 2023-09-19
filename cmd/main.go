@@ -9,9 +9,9 @@ import (
 	"github.com/bustafed/finalBackC4_G9/cmd/middlewares"
 	"github.com/bustafed/finalBackC4_G9/cmd/server/handler"
 	"github.com/bustafed/finalBackC4_G9/docs"
+	"github.com/bustafed/finalBackC4_G9/internal/appointments"
 	"github.com/bustafed/finalBackC4_G9/internal/dentists"
 	"github.com/bustafed/finalBackC4_G9/internal/patients"
-	"github.com/bustafed/finalBackC4_G9/internal/appointments"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	swaggerFiles "github.com/swaggo/files"
@@ -111,12 +111,12 @@ func main() {
 	appointmentsGroup := router.Group("/appointments")
 
 	appointmentsGroup.GET("/:id", appointmentsHandler.GetAppointmentByID)
-	
+
 	appointmentsGroup.GET("/", appointmentsHandler.GetAppointmentByDni)
 
 	appointmentsGroup.POST("/", authMidd.AuthHeader, appointmentsHandler.CreateAppointment)
 
-	 appointmentsGroup.PUT("/:id", authMidd.AuthHeader, appointmentsHandler.FullUpdateAppointmentByID)
+	appointmentsGroup.PUT("/:id", authMidd.AuthHeader, appointmentsHandler.FullUpdateAppointmentByID)
 
 	appointmentsGroup.PATCH("/:id", authMidd.AuthHeader, appointmentsHandler.UpdateAppointmentByID)
 

@@ -2,11 +2,10 @@ package handler
 
 import (
 	"fmt"
-	"net/http"
-	"strconv"
-
 	"github.com/bustafed/finalBackC4_G9/internal/appointments"
 	"github.com/gin-gonic/gin"
+	"net/http"
+	"strconv"
 )
 
 type AppointmentsGetter interface {
@@ -69,7 +68,7 @@ func (ah *AppointmentsHandler) GetAppointmentByID(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, appointment)
 }
 
-// GetAppointmentByDNI godoc
+// GetAppointmentByDni godoc
 // @Summary      Gets all appointments by dni
 // @Description  Gets all appointments if any by patient dni
 // @Tags         Appointment
@@ -95,12 +94,12 @@ func (ah *AppointmentsHandler) GetAppointmentByDni(ctx *gin.Context) {
 		return
 	}
 
-	appointments, err := ah.appointmentsGetter.GetAppointmentByDni(dni)
+	appointmentsReturn, err := ah.appointmentsGetter.GetAppointmentByDni(dni)
 	if err != nil {
 		ctx.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return
 	}
-	ctx.JSON(http.StatusOK, appointments)
+	ctx.JSON(http.StatusOK, appointmentsReturn)
 }
 
 // CreateAppointment godoc
@@ -145,7 +144,7 @@ func (ah *AppointmentsHandler) CreateAppointment(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, appointment)
 }
 
-// UpdateAppointmentByID godoc
+// FullUpdateAppointmentByID godoc
 // @Summary      Updates an Appointment by id
 // @Description  Updates an Appointment by id, you must send all of the appointment fields to process your request
 // @Tags         Appointment
