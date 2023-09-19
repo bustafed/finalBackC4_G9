@@ -16,7 +16,6 @@ type PublicConfig struct {
 	PostgresHost     string
 	PostgresPort     string
 	PostgresDatabase string
-	PostgresPassword string
 }
 
 type PrivateConfig struct {
@@ -32,7 +31,6 @@ var (
 			PostgresPort:     "5432",
 			PostgresHost:     "localhost",
 			PostgresDatabase: "test-database",
-			PostgresPassword: "pass_c4g9",
 		},
 		"dev": {
 			PublicKey: "devAdmin",
@@ -44,7 +42,6 @@ var (
 )
 
 func NewConfig(env string) (Config, error) {
-
 	publicConfig, exists := envs[env]
 	if !exists {
 		return Config{}, errors.New("env doest not exists")
@@ -67,5 +64,4 @@ func NewConfig(env string) (Config, error) {
 			PostgresPassword: postgresPassword,
 		},
 	}, nil
-
 }
